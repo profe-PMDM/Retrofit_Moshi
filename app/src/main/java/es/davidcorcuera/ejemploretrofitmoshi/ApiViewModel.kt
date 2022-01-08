@@ -15,6 +15,13 @@ class ApiViewModel: ViewModel() {
     val response: LiveData<String>
         get() = _response
 
+    // The internal MutableLiveData String that stores the responde image URL
+    private val _imgSrcUrl = MutableLiveData<String>()
+
+    // The external immutable LiveData for the response image URL
+    val imgSrcUrl: LiveData<String>
+        get() = _imgSrcUrl
+
     fun getImageRandom(){
         viewModelScope.launch {
             try {
@@ -31,9 +38,8 @@ class ApiViewModel: ViewModel() {
         viewModelScope.launch {
             try {
                 // Call API to get random image
-                _response.value = ApiMoshi.retrofitMoshiService.getImageRandom().message
+                _imgSrcUrl.value = ApiMoshi.retrofitMoshiService.getImageRandom().message
             } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
                 Log.d("Retrofit",e.message!!)
             }
         }

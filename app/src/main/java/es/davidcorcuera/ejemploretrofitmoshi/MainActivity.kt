@@ -2,6 +2,7 @@ package es.davidcorcuera.ejemploretrofitmoshi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import es.davidcorcuera.ejemploretrofitmoshi.databinding.ActivityMainBinding
 
@@ -24,13 +25,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //ClickListener to get image random JSON formatted
-        binding.btnImageRandom.setOnClickListener{viewModel.getImageRandom()}
+        binding.btnImageRandom.setOnClickListener{
+            binding.scrollText.visibility = View.VISIBLE
+            binding.scrollImage.visibility = View.GONE
+            viewModel.getImageRandom()}
 
         //ClickListener to get image random converted from JSON
-        binding.btnImageRandomMoshi.setOnClickListener{viewModel.getImageRandomMoshi()}
+        binding.btnImageRandomMoshi.setOnClickListener{
+            binding.scrollText.visibility = View.GONE
+            binding.scrollImage.visibility = View.VISIBLE
+            viewModel.getImageRandomMoshi()}
 
         //ClickListener to list all breeds JSON formatted
-        binding.btnListAllRaw.setOnClickListener{viewModel.getAll()}
+        binding.btnListAllRaw.setOnClickListener{
+            binding.scrollText.visibility = View.VISIBLE
+            binding.scrollImage.visibility = View.GONE
+            viewModel.getAll()}
 
     }
 }
